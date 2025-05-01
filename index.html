@@ -19,7 +19,7 @@
                 <!-- Form inputs -->
                 <div>
                     <label for="subject" class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
-                    <input type="text" id="subject" placeholder="A detailed portrait of a young woman with freckles" 
+                    <input type="text" id="subject" placeholder="Beautiful mature fat plump muscular Japanese female bodybuilder in bikini string" 
                         class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
@@ -31,31 +31,31 @@
 
                 <div>
                     <label for="composition" class="block text-sm font-medium text-slate-700 mb-1">Composition & Framing</label>
-                    <input type="text" id="composition" placeholder="Portrait orientation, head and shoulders framing" 
+                    <input type="text" id="composition" placeholder="Full body shot highlighting muscular development" 
                         class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <div>
                     <label for="lighting" class="block text-sm font-medium text-slate-700 mb-1">Lighting & Color</label>
-                    <input type="text" id="lighting" placeholder="Rembrandt lighting with soft shadow on cheek" 
+                    <input type="text" id="lighting" placeholder="Competition stage lighting with dramatic highlights on muscles" 
                         class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <div>
                     <label for="camera" class="block text-sm font-medium text-slate-700 mb-1">Camera & Technical Specs</label>
-                    <input type="text" id="camera" placeholder="Shot on Canon 5D Mark IV with 85mm f/1.2 portrait lens" 
+                    <input type="text" id="camera" placeholder="Canon 5D Mark IV with 70-200mm f/2.8 sports lens" 
                         class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <div>
                     <label for="style" class="block text-sm font-medium text-slate-700 mb-1">Style & Quality Keywords</label>
-                    <input type="text" id="style" placeholder="Hyperrealistic skin texture, pore-level detail, professional retouching" 
+                    <input type="text" id="style" placeholder="Professional bodybuilding competition documentation style" 
                         class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <div>
                     <label for="negative" class="block text-sm font-medium text-slate-700 mb-1">Negative Prompts</label>
-                    <input type="text" id="negative" placeholder="blurry, out of focus, soft focus, gaussian blur" 
+                    <input type="text" id="negative" placeholder="blurry, out of focus, soft focus, poorly lit muscles" 
                         class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 
@@ -125,22 +125,22 @@
             // Database of options for random generation
             const promptDatabase = {
                 subject: [
-                    "A detailed portrait of a young woman with freckles",
-                    "An elderly man with weathered face and deep wrinkles",
-                    "A fashion model with striking features",
-                    "A person with unique heterochromia eyes",
-                    "A professional athlete in action pose",
-                    "A bride in wedding attire",
-                    "A ballet dancer mid-performance",
-                    "A chef in professional kitchen attire",
-                    "A business executive in formal attire",
-                    "A firefighter in uniform",
-                    "A tattooed artist with creative expression",
-                    "A surfer with sun-bleached hair",
-                    "A traditional tribal elder with cultural face paint",
-                    "A concert musician performing on stage",
-                    "A medical professional in scrubs",
-                    "A child with innocent expression"
+                    "Beautiful gorgeous bbw thick chubby mature fat plump muscular Japanese female bodybuilder in bikini string",
+                    "Cute bbw thick chubby mature plump muscular Japanese female bodybuilder in string bikini",
+                    "Gorgeous bbw thick chubby fat muscular Japanese female bodybuilder posing in bikini string",
+                    "Beautiful cute thick bbw chubby plump muscular mature Japanese woman in string bikini",
+                    "Gorgeous bbw thick chubby plump yet muscular mature Japanese female bodybuilder in bikini string",
+                    "Beautiful cute thick bbw chubby muscular fat Japanese female bodybuilder in blue string bikini",
+                    "Gorgeous beautiful thick bbw chubby plump Japanese female bodybuilder with defined muscles in string bikini",
+                    "Cute bbw thick chubby mature fat muscular Japanese woman bodybuilder in red bikini string",
+                    "Beautiful gorgeous thick bbw chubby plump muscular Japanese female bodybuilder in black string bikini",
+                    "Cute beautiful bbw thick chubby mature Japanese female bodybuilder with plump muscular physique in bikini string",
+                    "Gorgeous thick bbw chubby fat yet defined Japanese female bodybuilder in colorful string bikini",
+                    "Beautiful cute bbw thick chubby plump Japanese female with visible muscle tone in bikini string",
+                    "Gorgeous thick bbw chubby mature muscular Japanese woman with fuller figure in string bikini",
+                    "Cute beautiful thick bbw chubby fat muscular Japanese bodybuilder in purple string bikini",
+                    "Beautiful gorgeous bbw thick chubby plump muscular mature Japanese female in gold bikini string",
+                    "Cute gorgeous thick bbw chubby mature Japanese female bodybuilder with full figured muscular build in string bikini"
                 ],
                 environment: [
                     "In a modern studio with minimalist backdrop",
@@ -148,107 +148,107 @@
                     "Natural outdoor setting with soft foliage",
                     "Beach scene with ocean waves in background",
                     "Cozy indoor home environment with natural light",
-                    "Professional office setting, clean and modern",
-                    "Artistic studio with creative lighting setup",
+                    "Professional studio with neutral backdrop",
+                    "Artistic setting with creative lighting",
                     "City streets during blue hour",
                     "Historic architecture with classical elements",
                     "Industrial warehouse with exposed brick and metal",
                     "Mountain landscape with dramatic vista",
-                    "Subway station with urban grit",
-                    "Luxury hotel lobby with elegant decor",
-                    "Night club with atmospheric lighting",
-                    "Coffee shop with warm ambient lighting",
-                    "Public park with seasonal foliage"
+                    "Luxury hotel room with elegant decor",
+                    "Traditional Japanese garden with cherry blossoms",
+                    "Urban rooftop with city skyline",
+                    "Tropical resort with palm trees and pools",
+                    "Modern architectural setting with clean lines"
                 ],
                 composition: [
-                    "Portrait orientation, head and shoulders framing",
-                    "Full body shot, centered composition",
-                    "Extreme close-up on facial features",
-                    "Three-quarter view with rule of thirds",
-                    "Environmental portrait with context",
-                    "Profile view with negative space",
-                    "Candid pose with natural gestures",
-                    "Over-the-shoulder perspective with blurred background",
-                    "Low angle shot creating powerful presence",
-                    "High angle shot for vulnerability",
-                    "Symmetrical composition with direct gaze",
-                    "Asymmetrical framing with intentional imbalance",
-                    "Silhouette against bright background",
-                    "Focus on hands or specific body part",
-                    "Multiple exposure portrait with creative overlap",
-                    "Frame within a frame using environmental elements"
+                    "Full body shot highlighting muscular development",
+                    "Three-quarter pose emphasizing muscle definition",
+                    "Classical bodybuilding front double bicep pose",
+                    "Side chest pose showcasing upper body development",
+                    "Competition stance with professional posing technique",
+                    "Dynamic action shot mid-flexing muscles",
+                    "Portrait framing with emphasis on facial determination and upper body",
+                    "Symmetrical composition highlighting muscular balance",
+                    "Low angle shot emphasizing power and strength",
+                    "Classic V-taper pose emphasizing shoulders and back",
+                    "Detail shot focusing on specific muscle definition",
+                    "Wide shot showcasing full physique in competition stance",
+                    "Comparative before/during flexing composition",
+                    "Rule of thirds composition with subject in power pose",
+                    "Silhouette emphasizing muscular contours",
+                    "Rear pose highlighting back and glute development"
                 ],
                 lighting: [
-                    "Rembrandt lighting with soft shadow on cheek",
-                    "Split lighting creating dramatic mood",
-                    "Butterfly lighting highlighting facial symmetry",
-                    "Natural window light with soft diffusion",
-                    "Ring light creating circular catchlights",
-                    "Broad lighting for flattering facial features",
-                    "Backlit with golden rim light on hair",
-                    "Studio three-point lighting, perfectly balanced",
-                    "Short lighting accentuating face shape",
-                    "Dappled light through foliage creating patterns",
-                    "Clamshell lighting for fashion-style beauty shots",
-                    "Dramatic low-key lighting with strong contrast",
-                    "High-key lighting eliminating shadows",
-                    "Colored gels creating mood and atmosphere",
-                    "Harsh direct light for raw documentary feel",
-                    "Single-source side lighting with shadow detail"
+                    "Competition stage lighting with dramatic highlights on muscles",
+                    "Studio lighting emphasizing muscle separation and definition",
+                    "Rim lighting to highlight muscular contours",
+                    "Side lighting accentuating muscle striations and detail",
+                    "Golden hour natural light creating warm tones on skin",
+                    "High-contrast lighting emphasizing muscle depth",
+                    "Split lighting to showcase muscular symmetry",
+                    "Overhead lighting casting defined shadows on muscle groups",
+                    "Dramatic spotlighting focusing on peak muscle development",
+                    "Soft diffused light showing natural skin tone with muscle definition",
+                    "Cross-lighting to reveal maximum muscular detail",
+                    "Competition-style harsh front lighting showing complete definition",
+                    "Bodybuilding-specific three-point lighting emphasizing cuts",
+                    "Colored gel accents highlighting specific muscle groups",
+                    "Low-key lighting creating dramatic muscular shadows",
+                    "Beauty-style clamshell lighting balancing strength with femininity"
                 ],
                 camera: [
-                    "Shot on Canon 5D Mark IV with 85mm f/1.2 portrait lens",
-                    "Captured with Sony A7R IV, 50mm f/1.4 prime lens",
-                    "Nikon Z9 with 70-200mm f/2.8 lens at 135mm",
-                    "Medium format Hasselblad H6D-100c, exceptional detail",
-                    "Fujifilm GFX 100S medium format, 110mm f/2 portrait lens",
-                    "Leica Q2 with 28mm f/1.7 Summilux lens",
-                    "Canon EOS R5 with RF 28-70mm f/2 L lens",
-                    "Nikon D850 with 105mm f/1.4 portrait lens",
-                    "Panasonic S1R with 85mm f/1.4 Sigma Art lens",
-                    "Phase One medium format with 80mm leaf shutter lens",
-                    "Sony A1 with 135mm f/1.8 GM portrait lens",
-                    "Leica M11 rangefinder with 75mm APO-Summicron lens",
-                    "Fujifilm X-Pro3 with 56mm f/1.2 portrait lens",
-                    "Canon EOS R3 with 50mm f/1.2 L lens",
-                    "Olympus OM-1 with 45mm f/1.2 Pro lens",
-                    "Pentax 645Z medium format with 90mm f/2.8 lens"
+                    "Canon 5D Mark IV with 70-200mm f/2.8 sports lens",
+                    "Sony A1 with 35mm f/1.4 GM lens for environmental portraits",
+                    "Nikon Z9 with 24-70mm f/2.8 at 50mm for competition coverage",
+                    "Medium format Hasselblad H6D-100c for ultimate skin and muscle detail",
+                    "Canon EOS R5 with 85mm f/1.2 for studio bodybuilding portraits",
+                    "Sony A7R IV with 135mm f/1.8 GM lens for muscle detail",
+                    "Fujifilm GFX 100S medium format with 110mm f/2 portrait lens",
+                    "Nikon D850 with 105mm f/1.4 for bodybuilding competition shots",
+                    "Canon EOS R3 with 24-70mm f/2.8 L for dynamic fitness action",
+                    "RED DSMC2 with Helium 8K sensor for professional video and stills",
+                    "Blackmagic URSA Mini Pro 12K for high-resolution fitness coverage",
+                    "Phase One IQ4 150MP for competition documentary coverage",
+                    "Fujifilm X-H2 with 56mm f/1.2 for candid backstage moments",
+                    "Panasonic S1H with 24-105mm f/4 for hybrid photo/video documentation",
+                    "Leica SL2 with 90mm f/2 APO-Summicron for artistic fitness portraits",
+                    "Sony FX3 with 50mm T1.5 cinema lens for dramatic bodybuilding portraits"
                 ],
                 style: [
-                    "Hyperrealistic skin texture, pore-level detail, professional retouching",
-                    "Fashion magazine editorial quality, high-end commercial look",
-                    "Photojournalistic style, authentic emotion, genuine expression",
-                    "High-key portrait, bright and airy, clean whites",
-                    "Low-key portrait, dramatic shadows, moody atmosphere",
-                    "Film-inspired color grading, subtle grain, analog feel",
-                    "Glossy magazine cover quality, flawless complexion",
-                    "Natural documentary style, unposed, authentic moment",
-                    "Cinematic color grading with complementary palette",
-                    "Black and white with rich tonal range and contrast",
-                    "Environmental portraiture with storytelling context",
-                    "Vogue-inspired high fashion aesthetic",
-                    "Artistic fine art portrait with painterly quality",
-                    "Street photography with authentic urban feel",
-                    "Vintage film emulation with period-specific look",
-                    "Glamour photography with polished professional finish"
+                    "Professional bodybuilding competition documentation style",
+                    "High-end fitness magazine editorial quality",
+                    "Sports physique photography with emphasis on muscle detail",
+                    "Glossy fitness magazine cover style with dramatic lighting",
+                    "Documentary-style authentic training and competition moments",
+                    "Clean sports photography with neutral background and perfect detail",
+                    "Artistic fitness portrait with emphasis on form and aesthetics",
+                    "Commercial fitness advertising with polished, professional look",
+                    "Inspirational transformation photography style",
+                    "High-contrast black and white emphasizing muscle definition",
+                    "Japanese fitness magazine editorial style with cultural elements",
+                    "Cinematic color grading with sports documentary aesthetic",
+                    "Modern fitness influencer style with vibrant, bold colors",
+                    "Classic bodybuilding photography inspired by golden era physiques",
+                    "Professional competition portfolio with technical precision",
+                    "Strength-focused artistic photography with dramatic shadows"
                 ],
                 negative: [
-                    "blurry, out of focus, soft focus, gaussian blur",
-                    "airbrushed, overly retouched, plastic skin, fake",
-                    "distorted facial features, unrealistic proportions",
-                    "oversaturated skin tones, unnatural colors",
-                    "blown highlights, harsh shadows, poor lighting",
-                    "low resolution, pixelated, poor quality, noise",
-                    "cartoon style, illustration, painting, not photographic",
-                    "stock photo look, generic pose, overly staged",
-                    "unrealistic facial expression, uncanny valley",
-                    "CGI, 3D rendered, artificial looking",
-                    "excessive post-processing, over-sharpened",
-                    "bad framing, cropped limbs, awkward composition",
-                    "excessive makeup, unnatural appearance",
-                    "lens distortion, fisheye effect, warped perspective",
-                    "grainy, noisy, high ISO artifacts",
-                    "badly composited, photoshopped, fake background"
+                    "blurry, out of focus, soft focus, poorly lit muscles",
+                    "distorted body proportions, unrealistic anatomy, warped features",
+                    "unflattering angles, awkward poses, poor composition",
+                    "overprocessed skin, plastic appearance, excessive retouching",
+                    "unprofessional photography, amateur quality, poor lighting",
+                    "missing muscle definition, flat lighting, lack of contrast",
+                    "cartoonish appearance, non-photorealistic rendering, digital art",
+                    "incorrect bodybuilding poses, anatomically impossible positions",
+                    "grainy, noisy, low resolution, pixelated",
+                    "oversaturated colors, unnatural skin tones, excessive HDR",
+                    "distracting backgrounds, cluttered composition, busy elements",
+                    "unflattering facial expressions, closed eyes, awkward look",
+                    "incorrect muscle anatomy, physiologically impossible definition",
+                    "poor competition attire fit, wardrobe malfunction, unprofessional appearance",
+                    "bad stage lighting, harsh unflattering shadows, blown highlights",
+                    "uneven tan, streaky competition color, patchy application"
                 ]
             };
 
