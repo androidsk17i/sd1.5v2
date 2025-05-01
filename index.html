@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photorealistic Prompt Generator</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col items-center p-4 md:p-8">
+    <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-6 md:p-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-slate-800">Photorealistic Prompt Generator</h1>
+            <p class="text-slate-600 mt-2">Create detailed prompts for photorealistic image generation</p>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+                <!-- Form inputs -->
+                <div>
+                    <label for="subject" class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
+                    <input type="text" id="subject" placeholder="A detailed portrait of a young woman with freckles" 
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="environment" class="block text-sm font-medium text-slate-700 mb-1">Environment & Mood</label>
+                    <input type="text" id="environment" placeholder="In a modern studio with minimalist backdrop" 
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="composition" class="block text-sm font-medium text-slate-700 mb-1">Composition & Framing</label>
+                    <input type="text" id="composition" placeholder="Portrait orientation, head and shoulders framing" 
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="lighting" class="block text-sm font-medium text-slate-700 mb-1">Lighting & Color</label>
+                    <input type="text" id="lighting" placeholder="Rembrandt lighting with soft shadow on cheek" 
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="camera" class="block text-sm font-medium text-slate-700 mb-1">Camera & Technical Specs</label>
+                    <input type="text" id="camera" placeholder="Shot on Canon 5D Mark IV with 85mm f/1.2 portrait lens" 
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="style" class="block text-sm font-medium text-slate-700 mb-1">Style & Quality Keywords</label>
+                    <input type="text" id="style" placeholder="Hyperrealistic skin texture, pore-level detail, professional retouching" 
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="negative" class="block text-sm font-medium text-slate-700 mb-1">Negative Prompts</label>
+                    <input type="text" id="negative" placeholder="blurry, out of focus, soft focus, gaussian blur" 
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <button id="randomBtn" class="w-full py-2 px-4 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition">
+                    Generate Random Prompt
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label for="output" class="block text-sm font-medium text-slate-700 mb-1">Generated Prompt</label>
+                    <textarea id="output" readonly rows="12" 
+                        class="w-full p-3 border border-slate-300 rounded-md bg-slate-50 focus:outline-none"></textarea>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <button id="copyPositiveBtn" class="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                            <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                        </svg>
+                        Copy Positive
+                    </button>
+                    
+                    <button id="copyNegativeBtn" class="w-full py-2 px-4 bg-red-600 text-white font-medium rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                            <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                        </svg>
+                        Copy Negative
+                    </button>
+                </div>
+                
+                <div id="copyMessage" class="hidden mt-2 p-2 bg-green-100 text-green-800 rounded-md text-center">
+                    Prompt copied to clipboard!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Photorealistic Prompt Generator
+         * A tool for creating detailed prompts for AI image generation
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
+            const elements = {
+                inputs: {
+                    subject: document.getElementById('subject'),
+                    environment: document.getElementById('environment'),
+                    composition: document.getElementById('composition'),
+                    lighting: document.getElementById('lighting'),
+                    camera: document.getElementById('camera'),
+                    style: document.getElementById('style'),
+                    negative: document.getElementById('negative')
+                },
+                output: document.getElementById('output'),
+                buttons: {
+                    random: document.getElementById('randomBtn'),
+                    copyPositive: document.getElementById('copyPositiveBtn'),
+                    copyNegative: document.getElementById('copyNegativeBtn')
+                },
+                copyMessage: document.getElementById('copyMessage')
+            };
+
+            // Database of options for random generation
+            const promptDatabase = {
+                subject: [
+                    "A detailed portrait of a young woman with freckles",
+                    "An elderly man with weathered face and deep wrinkles",
+                    "A fashion model with striking features",
+                    "A person with unique heterochromia eyes",
+                    "A professional athlete in action pose",
+                    "A bride in wedding attire",
+                    "A ballet dancer mid-performance",
+                    "A chef in professional kitchen attire",
+                    "A business executive in formal attire",
+                    "A firefighter in uniform",
+                    "A tattooed artist with creative expression",
+                    "A surfer with sun-bleached hair",
+                    "A traditional tribal elder with cultural face paint",
+                    "A concert musician performing on stage",
+                    "A medical professional in scrubs",
+                    "A child with innocent expression"
+                ],
+                environment: [
+                    "In a modern studio with minimalist backdrop",
+                    "Urban cityscape at golden hour",
+                    "Natural outdoor setting with soft foliage",
+                    "Beach scene with ocean waves in background",
+                    "Cozy indoor home environment with natural light",
+                    "Professional office setting, clean and modern",
+                    "Artistic studio with creative lighting setup",
+                    "City streets during blue hour",
+                    "Historic architecture with classical elements",
+                    "Industrial warehouse with exposed brick and metal",
+                    "Mountain landscape with dramatic vista",
+                    "Subway station with urban grit",
+                    "Luxury hotel lobby with elegant decor",
+                    "Night club with atmospheric lighting",
+                    "Coffee shop with warm ambient lighting",
+                    "Public park with seasonal foliage"
+                ],
+                composition: [
+                    "Portrait orientation, head and shoulders framing",
+                    "Full body shot, centered composition",
+                    "Extreme close-up on facial features",
+                    "Three-quarter view with rule of thirds",
+                    "Environmental portrait with context",
+                    "Profile view with negative space",
+                    "Candid pose with natural gestures",
+                    "Over-the-shoulder perspective with blurred background",
+                    "Low angle shot creating powerful presence",
+                    "High angle shot for vulnerability",
+                    "Symmetrical composition with direct gaze",
+                    "Asymmetrical framing with intentional imbalance",
+                    "Silhouette against bright background",
+                    "Focus on hands or specific body part",
+                    "Multiple exposure portrait with creative overlap",
+                    "Frame within a frame using environmental elements"
+                ],
+                lighting: [
+                    "Rembrandt lighting with soft shadow on cheek",
+                    "Split lighting creating dramatic mood",
+                    "Butterfly lighting highlighting facial symmetry",
+                    "Natural window light with soft diffusion",
+                    "Ring light creating circular catchlights",
+                    "Broad lighting for flattering facial features",
+                    "Backlit with golden rim light on hair",
+                    "Studio three-point lighting, perfectly balanced",
+                    "Short lighting accentuating face shape",
+                    "Dappled light through foliage creating patterns",
+                    "Clamshell lighting for fashion-style beauty shots",
+                    "Dramatic low-key lighting with strong contrast",
+                    "High-key lighting eliminating shadows",
+                    "Colored gels creating mood and atmosphere",
+                    "Harsh direct light for raw documentary feel",
+                    "Single-source side lighting with shadow detail"
+                ],
+                camera: [
+                    "Shot on Canon 5D Mark IV with 85mm f/1.2 portrait lens",
+                    "Captured with Sony A7R IV, 50mm f/1.4 prime lens",
+                    "Nikon Z9 with 70-200mm f/2.8 lens at 135mm",
+                    "Medium format Hasselblad H6D-100c, exceptional detail",
+                    "Fujifilm GFX 100S medium format, 110mm f/2 portrait lens",
+                    "Leica Q2 with 28mm f/1.7 Summilux lens",
+                    "Canon EOS R5 with RF 28-70mm f/2 L lens",
+                    "Nikon D850 with 105mm f/1.4 portrait lens",
+                    "Panasonic S1R with 85mm f/1.4 Sigma Art lens",
+                    "Phase One medium format with 80mm leaf shutter lens",
+                    "Sony A1 with 135mm f/1.8 GM portrait lens",
+                    "Leica M11 rangefinder with 75mm APO-Summicron lens",
+                    "Fujifilm X-Pro3 with 56mm f/1.2 portrait lens",
+                    "Canon EOS R3 with 50mm f/1.2 L lens",
+                    "Olympus OM-1 with 45mm f/1.2 Pro lens",
+                    "Pentax 645Z medium format with 90mm f/2.8 lens"
+                ],
+                style: [
+                    "Hyperrealistic skin texture, pore-level detail, professional retouching",
+                    "Fashion magazine editorial quality, high-end commercial look",
+                    "Photojournalistic style, authentic emotion, genuine expression",
+                    "High-key portrait, bright and airy, clean whites",
+                    "Low-key portrait, dramatic shadows, moody atmosphere",
+                    "Film-inspired color grading, subtle grain, analog feel",
+                    "Glossy magazine cover quality, flawless complexion",
+                    "Natural documentary style, unposed, authentic moment",
+                    "Cinematic color grading with complementary palette",
+                    "Black and white with rich tonal range and contrast",
+                    "Environmental portraiture with storytelling context",
+                    "Vogue-inspired high fashion aesthetic",
+                    "Artistic fine art portrait with painterly quality",
+                    "Street photography with authentic urban feel",
+                    "Vintage film emulation with period-specific look",
+                    "Glamour photography with polished professional finish"
+                ],
+                negative: [
+                    "blurry, out of focus, soft focus, gaussian blur",
+                    "airbrushed, overly retouched, plastic skin, fake",
+                    "distorted facial features, unrealistic proportions",
+                    "oversaturated skin tones, unnatural colors",
+                    "blown highlights, harsh shadows, poor lighting",
+                    "low resolution, pixelated, poor quality, noise",
+                    "cartoon style, illustration, painting, not photographic",
+                    "stock photo look, generic pose, overly staged",
+                    "unrealistic facial expression, uncanny valley",
+                    "CGI, 3D rendered, artificial looking",
+                    "excessive post-processing, over-sharpened",
+                    "bad framing, cropped limbs, awkward composition",
+                    "excessive makeup, unnatural appearance",
+                    "lens distortion, fisheye effect, warped perspective",
+                    "grainy, noisy, high ISO artifacts",
+                    "badly composited, photoshopped, fake background"
+                ]
+            };
+
+            /**
+             * Initialize the application
+             */
+            function init() {
+                // Set up event listeners
+                attachEventListeners();
+            }
+
+            /**
+             * Set up all event listeners
+             */
+            function attachEventListeners() {
+                // Input changes
+                Object.values(elements.inputs).forEach(input => {
+                    input.addEventListener('input', updatePrompt);
+                });
+                
+                // Button clicks
+                elements.buttons.random.addEventListener('click', generateRandomPrompt);
+                elements.buttons.copyPositive.addEventListener('click', copyPositivePrompt);
+                elements.buttons.copyNegative.addEventListener('click', copyNegativePrompt);
+            }
+
+            /**
+             * Update the output prompt when inputs change
+             */
+            function updatePrompt() {
+                const promptParts = [
+                    elements.inputs.subject.value,
+                    elements.inputs.environment.value,
+                    elements.inputs.composition.value,
+                    elements.inputs.lighting.value,
+                    elements.inputs.camera.value,
+                    elements.inputs.style.value
+                ];
+                
+                // Filter out empty parts and join with semicolons
+                const positivePrompt = promptParts
+                    .filter(part => part.trim() !== '')
+                    .join('; ');
+                
+                // Get negative prompt if any
+                const negativePrompt = elements.inputs.negative.value.trim();
+                
+                // Update output - separating positive and negative prompts
+                if (negativePrompt) {
+                    elements.output.value = `${positivePrompt}\n\nNegative: ${negativePrompt}`;
+                } else {
+                    elements.output.value = positivePrompt;
+                }
+            }
+
+            /**
+             * Generate a random item from an array
+             */
+            function getRandomItem(array) {
+                return array[Math.floor(Math.random() * array.length)];
+            }
+
+            /**
+             * Generate and fill random prompt data
+             */
+            function generateRandomPrompt() {
+                // Fill positive inputs with random data
+                Object.keys(elements.inputs).forEach(key => {
+                    if (key !== 'negative') {
+                        elements.inputs[key].value = getRandomItem(promptDatabase[key]);
+                    }
+                });
+                
+                // Generate a random negative prompt
+                elements.inputs.negative.value = getRandomItem(promptDatabase.negative);
+                
+                // Update the prompt
+                updatePrompt();
+            }
+
+            /**
+             * Copy positive prompt to clipboard
+             */
+            function copyPositivePrompt() {
+                if (!elements.output.value.trim()) return;
+                
+                // Extract positive prompt
+                let positivePrompt;
+                if (elements.output.value.includes('\n\nNegative:')) {
+                    positivePrompt = elements.output.value.split('\n\nNegative:')[0].trim();
+                } else {
+                    positivePrompt = elements.output.value.trim();
+                }
+                
+                // Copy to clipboard
+                copyToClipboard(positivePrompt);
+                
+                // Show success message
+                showCopyMessage('Positive prompt copied!');
+            }
+
+            /**
+             * Copy negative prompt to clipboard
+             */
+            function copyNegativePrompt() {
+                if (!elements.output.value.trim()) return;
+                
+                // Check if there's a negative prompt
+                if (elements.output.value.includes('\n\nNegative:')) {
+                    const negativePrompt = elements.output.value.split('\n\nNegative:')[1].trim();
+                    
+                    // Copy to clipboard
+                    copyToClipboard(negativePrompt);
+                    
+                    // Show success message
+                    showCopyMessage('Negative prompt copied!');
+                } else {
+                    // Show message that there's no negative prompt
+                    showCopyMessage('No negative prompt to copy');
+                }
+            }
+
+            /**
+             * Copy text to clipboard using modern clipboard API when available
+             */
+            function copyToClipboard(text) {
+                // Try to use modern clipboard API if available
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).catch(() => {
+                        // Fallback to older method if clipboard API fails
+                        copyWithExecCommand(text);
+                    });
+                } else {
+                    // Fallback for older browsers
+                    copyWithExecCommand(text);
+                }
+            }
+
+            /**
+             * Fallback copy method using execCommand
+             */
+            function copyWithExecCommand(text) {
+                // Create a temporary textarea
+                const tempElement = document.createElement('textarea');
+                tempElement.value = text;
+                tempElement.style.position = 'absolute';
+                tempElement.style.left = '-9999px';
+                document.body.appendChild(tempElement);
+                
+                // Select and copy
+                tempElement.select();
+                document.execCommand('copy');
+                
+                // Clean up
+                document.body.removeChild(tempElement);
+            }
+
+            /**
+             * Show copy success/error message
+             */
+            function showCopyMessage(message) {
+                elements.copyMessage.textContent = message;
+                elements.copyMessage.classList.remove('hidden');
+                
+                // Hide message after delay
+                setTimeout(() => {
+                    elements.copyMessage.classList.add('hidden');
+                }, 2000);
+            }
+
+            // Initialize the application
+            init();
+        });
+    </script>
+</body>
+</html> 
