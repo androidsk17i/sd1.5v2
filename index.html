@@ -7,71 +7,133 @@
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col items-center p-4 md:p-8">
-    <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-6 md:p-8">
-        <header class="mb-8 text-center">
-            <h1 class="text-3xl font-bold text-slate-800">Photorealistic Prompt Generator</h1>
-            <p class="text-slate-600 mt-2">Create detailed prompts for photorealistic image generation</p>
+<body class="bg-slate-100 min-h-screen flex flex-col items-center p-4 md:p-8 transition-colors duration-300" id="bodyElement">
+    <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-6 md:p-8 transition-colors duration-300" id="mainContainer">
+        <header class="mb-8 text-center relative">
+            <div class="absolute right-0 top-0 flex space-x-2">
+                <button id="styleGuideBtn" class="p-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-colors duration-200" title="Style Guide">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <button id="darkModeToggle" class="p-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                </button>
+            </div>
+            <h1 class="text-3xl font-bold text-slate-800 transition-colors duration-300" id="pageTitle">Photorealistic Prompt Generator</h1>
+            <p class="text-slate-600 mt-2 transition-colors duration-300" id="pageSubtitle">Create detailed prompts for photorealistic image generation</p>
         </header>
 
         <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-4">
                 <!-- Form inputs -->
                 <div>
-                    <label for="subject" class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
-                    <input type="text" id="subject" placeholder="Beautiful mature fat plump muscular Japanese female bodybuilder in bikini string" 
-                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="subject" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Subject</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="subject" placeholder="Beautiful mature fat plump muscular Japanese female bodybuilder in bikini string" 
+                            class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                        <div class="flex items-center">
+                            <input type="number" id="subjectWeight" min="0.1" max="2" step="0.1" value="1.0" 
+                                class="w-16 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+                                title="Weight for this parameter (higher values give more emphasis)">
+                        </div>
+                    </div>
                 </div>
 
                 <div>
-                    <label for="environment" class="block text-sm font-medium text-slate-700 mb-1">Environment & Mood</label>
-                    <input type="text" id="environment" placeholder="In a modern studio with minimalist backdrop" 
-                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="environment" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Environment & Mood</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="environment" placeholder="In a modern studio with minimalist backdrop" 
+                            class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                        <div class="flex items-center">
+                            <input type="number" id="environmentWeight" min="0.1" max="2" step="0.1" value="1.0" 
+                                class="w-16 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+                                title="Weight for this parameter (higher values give more emphasis)">
+                        </div>
+                    </div>
                 </div>
 
                 <div>
-                    <label for="composition" class="block text-sm font-medium text-slate-700 mb-1">Composition & Framing</label>
-                    <input type="text" id="composition" placeholder="Full body shot highlighting muscular development" 
-                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="composition" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Composition & Framing</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="composition" placeholder="Full body shot highlighting muscular development" 
+                            class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                        <div class="flex items-center">
+                            <input type="number" id="compositionWeight" min="0.1" max="2" step="0.1" value="1.0" 
+                                class="w-16 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+                                title="Weight for this parameter (higher values give more emphasis)">
+                        </div>
+                    </div>
                 </div>
 
                 <div>
-                    <label for="lighting" class="block text-sm font-medium text-slate-700 mb-1">Lighting & Color</label>
-                    <input type="text" id="lighting" placeholder="Competition stage lighting with dramatic highlights on muscles" 
-                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="lighting" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Lighting & Color</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="lighting" placeholder="Competition stage lighting with dramatic highlights on muscles" 
+                            class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                        <div class="flex items-center">
+                            <input type="number" id="lightingWeight" min="0.1" max="2" step="0.1" value="1.0" 
+                                class="w-16 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+                                title="Weight for this parameter (higher values give more emphasis)">
+                        </div>
+                    </div>
                 </div>
 
                 <div>
-                    <label for="camera" class="block text-sm font-medium text-slate-700 mb-1">Camera & Technical Specs</label>
-                    <input type="text" id="camera" placeholder="Canon 5D Mark IV with 70-200mm f/2.8 sports lens" 
-                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="camera" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Camera & Technical Specs</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="camera" placeholder="Canon 5D Mark IV with 70-200mm f/2.8 sports lens" 
+                            class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                        <div class="flex items-center">
+                            <input type="number" id="cameraWeight" min="0.1" max="2" step="0.1" value="1.0" 
+                                class="w-16 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+                                title="Weight for this parameter (higher values give more emphasis)">
+                        </div>
+                    </div>
                 </div>
 
                 <div>
-                    <label for="style" class="block text-sm font-medium text-slate-700 mb-1">Style & Quality Keywords</label>
-                    <input type="text" id="style" placeholder="Professional bodybuilding competition documentation style" 
-                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="style" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Style & Quality Keywords</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="style" placeholder="Professional bodybuilding competition documentation style" 
+                            class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                        <div class="flex items-center">
+                            <input type="number" id="styleWeight" min="0.1" max="2" step="0.1" value="1.0" 
+                                class="w-16 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+                                title="Weight for this parameter (higher values give more emphasis)">
+                        </div>
+                    </div>
                 </div>
 
                 <div>
-                    <label for="negative" class="block text-sm font-medium text-slate-700 mb-1">Negative Prompts</label>
+                    <label for="negative" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Negative Prompts</label>
                     <input type="text" id="negative" placeholder="blurry, out of focus, soft focus, poorly lit muscles" 
-                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
                 </div>
                 
-                <button id="randomBtn" class="w-full py-2 px-4 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition">
-                    Generate Random Prompt
-                </button>
+                <div class="grid grid-cols-2 gap-4">
+                    <button id="randomBtn" class="w-full py-2 px-4 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition">
+                        Generate Random Prompt
+                    </button>
+                    <button id="sharePromptBtn" class="w-full py-2 px-4 bg-yellow-600 text-white font-medium rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                        </svg>
+                        Share Prompt
+                    </button>
+                </div>
             </div>
 
             <div class="space-y-4">
                 <div>
-                    <label for="output" class="block text-sm font-medium text-slate-700 mb-1">Generated Prompt</label>
+                    <label for="output" class="block text-sm font-medium text-slate-700 mb-1 transition-colors duration-300">Generated Prompt</label>
                     <textarea id="output" readonly rows="12" 
-                        class="w-full p-3 border border-slate-300 rounded-md bg-slate-50 focus:outline-none"></textarea>
+                        class="w-full p-3 border border-slate-300 rounded-md bg-slate-50 focus:outline-none transition-colors duration-300"></textarea>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-3 gap-4">
                     <button id="copyPositiveBtn" class="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -87,10 +149,71 @@
                         </svg>
                         Copy Negative
                     </button>
+                    
+                    <button id="savePromptBtn" class="w-full py-2 px-4 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+                        </svg>
+                        Save Prompt
+                    </button>
                 </div>
                 
-                <div id="copyMessage" class="hidden mt-2 p-2 bg-green-100 text-green-800 rounded-md text-center">
+                <div id="copyMessage" class="hidden mt-2 p-2 bg-green-100 text-green-800 rounded-md text-center transition-colors duration-300">
                     Prompt copied to clipboard!
+                </div>
+            </div>
+        </div>
+        
+        <div id="savedPromptsSection" class="mt-8 w-full hidden">
+            <h2 class="text-xl font-bold text-slate-800 mb-4 transition-colors duration-300">Saved Prompts</h2>
+            <div id="savedPromptsList" class="space-y-4">
+                <!-- Saved prompts will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Style Guide Modal -->
+    <div id="styleGuideModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 transition-colors duration-300">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-slate-800 dark:text-white transition-colors duration-300">Prompt Style Guide</h2>
+                <button id="closeStyleGuideBtn" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4 text-slate-700 dark:text-slate-300 transition-colors duration-300">
+                <div>
+                    <h3 class="font-medium text-lg mb-2">Prompt Weight System</h3>
+                    <p>Use the weight controls next to each input field to adjust the importance of each prompt section. Higher values give that section more emphasis in the final image.</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>1.0: Default weight (normal emphasis)</li>
+                        <li>Above 1.0: Increased emphasis (e.g., 1.5 = 50% more important)</li>
+                        <li>Below 1.0: Reduced emphasis (e.g., 0.5 = 50% less important)</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-lg mb-2">Creating Effective Prompts</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Be specific and descriptive in each section</li>
+                        <li>Use clear, detailed adjectives</li>
+                        <li>Include specific technical terms for better results</li>
+                        <li>Balance positive prompts with thorough negative prompts</li>
+                        <li>Experiment with different weight values</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-lg mb-2">Sharing & Saving</h3>
+                    <p>You can save prompts locally or share them with others:</p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>The "Save Prompt" button stores the prompt in your browser</li>
+                        <li>The "Share Prompt" button creates a link that contains all settings</li>
+                        <li>Saved prompts will appear at the bottom of the page</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -113,13 +236,39 @@
                     style: document.getElementById('style'),
                     negative: document.getElementById('negative')
                 },
+                weights: {
+                    subject: document.getElementById('subjectWeight'),
+                    environment: document.getElementById('environmentWeight'),
+                    composition: document.getElementById('compositionWeight'),
+                    lighting: document.getElementById('lightingWeight'),
+                    camera: document.getElementById('cameraWeight'),
+                    style: document.getElementById('styleWeight')
+                },
                 output: document.getElementById('output'),
                 buttons: {
                     random: document.getElementById('randomBtn'),
                     copyPositive: document.getElementById('copyPositiveBtn'),
-                    copyNegative: document.getElementById('copyNegativeBtn')
+                    copyNegative: document.getElementById('copyNegativeBtn'),
+                    savePrompt: document.getElementById('savePromptBtn'),
+                    darkModeToggle: document.getElementById('darkModeToggle'),
+                    sharePrompt: document.getElementById('sharePromptBtn'),
+                    styleGuide: document.getElementById('styleGuideBtn'),
+                    closeStyleGuide: document.getElementById('closeStyleGuideBtn')
                 },
-                copyMessage: document.getElementById('copyMessage')
+                copyMessage: document.getElementById('copyMessage'),
+                savedPromptsSection: document.getElementById('savedPromptsSection'),
+                savedPromptsList: document.getElementById('savedPromptsList'),
+                bodyElement: document.getElementById('bodyElement'),
+                mainContainer: document.getElementById('mainContainer'),
+                pageTitle: document.getElementById('pageTitle'),
+                pageSubtitle: document.getElementById('pageSubtitle'),
+                styleGuideModal: document.getElementById('styleGuideModal')
+            };
+
+            // Application state
+            const state = {
+                darkMode: localStorage.getItem('darkMode') === 'true',
+                savedPrompts: JSON.parse(localStorage.getItem('savedPrompts') || '[]')
             };
 
             // Database of options for random generation
@@ -258,6 +407,17 @@
             function init() {
                 // Set up event listeners
                 attachEventListeners();
+                
+                // Load saved prompts
+                renderSavedPrompts();
+                
+                // Apply dark mode if saved
+                if (state.darkMode) {
+                    applyDarkMode();
+                }
+                
+                // Generate a random prompt on startup
+                generateRandomPrompt();
             }
 
             /**
@@ -269,28 +429,347 @@
                     input.addEventListener('input', updatePrompt);
                 });
                 
+                // Weight changes
+                Object.values(elements.weights).forEach(weight => {
+                    weight.addEventListener('input', updatePrompt);
+                });
+                
                 // Button clicks
                 elements.buttons.random.addEventListener('click', generateRandomPrompt);
                 elements.buttons.copyPositive.addEventListener('click', copyPositivePrompt);
                 elements.buttons.copyNegative.addEventListener('click', copyNegativePrompt);
+                elements.buttons.savePrompt.addEventListener('click', saveCurrentPrompt);
+                elements.buttons.darkModeToggle.addEventListener('click', toggleDarkMode);
+                elements.buttons.sharePrompt.addEventListener('click', sharePrompt);
+                elements.buttons.styleGuide.addEventListener('click', toggleStyleGuide);
+                elements.buttons.closeStyleGuide.addEventListener('click', toggleStyleGuide);
+                
+                // Close modal when clicking outside
+                elements.styleGuideModal.addEventListener('click', (e) => {
+                    if (e.target === elements.styleGuideModal) {
+                        toggleStyleGuide();
+                    }
+                });
+                
+                // Keyboard events
+                document.addEventListener('keydown', (e) => {
+                    // Close style guide with Escape key
+                    if (e.key === 'Escape' && !elements.styleGuideModal.classList.contains('hidden')) {
+                        toggleStyleGuide();
+                    }
+                    
+                    // Generate random prompt with Ctrl+Space
+                    if (e.ctrlKey && e.code === 'Space') {
+                        e.preventDefault();
+                        generateRandomPrompt();
+                    }
+                });
+                
+                // Responsive adjustments for mobile
+                window.addEventListener('resize', adjustForMobile);
+                
+                // Check for URL parameters on load
+                checkUrlForSharedPrompt();
+                
+                // Initial mobile check
+                adjustForMobile();
+            }
+
+            /**
+             * Toggle dark mode
+             */
+            function toggleDarkMode() {
+                state.darkMode = !state.darkMode;
+                localStorage.setItem('darkMode', state.darkMode);
+                
+                if (state.darkMode) {
+                    applyDarkMode();
+                } else {
+                    removeDarkMode();
+                }
+            }
+            
+            /**
+             * Toggle style guide modal visibility
+             */
+            function toggleStyleGuide() {
+                elements.styleGuideModal.classList.toggle('hidden');
+            }
+            
+            /**
+             * Adjust layout for mobile devices
+             */
+            function adjustForMobile() {
+                const isMobile = window.innerWidth < 768;
+                
+                if (isMobile) {
+                    // Hide weight inputs on mobile for cleaner layout
+                    document.querySelectorAll('[id$="Weight"]').forEach(input => {
+                        input.closest('div.flex.items-center').classList.add('hidden');
+                    });
+                } else {
+                    // Show weight inputs on desktop
+                    document.querySelectorAll('[id$="Weight"]').forEach(input => {
+                        input.closest('div.flex.items-center').classList.remove('hidden');
+                    });
+                }
+            }
+            
+            /**
+             * Apply dark mode styles
+             */
+            function applyDarkMode() {
+                elements.bodyElement.classList.remove('bg-slate-100');
+                elements.bodyElement.classList.add('bg-slate-900');
+                
+                elements.mainContainer.classList.remove('bg-white');
+                elements.mainContainer.classList.add('bg-slate-800');
+                
+                elements.pageTitle.classList.remove('text-slate-800');
+                elements.pageTitle.classList.add('text-white');
+                
+                elements.pageSubtitle.classList.remove('text-slate-600');
+                elements.pageSubtitle.classList.add('text-slate-300');
+                
+                // Update all input labels to light color
+                document.querySelectorAll('label').forEach(label => {
+                    label.classList.remove('text-slate-700');
+                    label.classList.add('text-slate-300');
+                });
+                
+                // Update all input backgrounds
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    input.classList.remove('bg-slate-50', 'border-slate-300');
+                    input.classList.add('bg-slate-700', 'border-slate-600', 'text-white');
+                });
+                
+                // Update dark mode toggle icon
+                elements.buttons.darkModeToggle.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+                    </svg>
+                `;
+                elements.buttons.darkModeToggle.classList.remove('bg-slate-200', 'hover:bg-slate-300');
+                elements.buttons.darkModeToggle.classList.add('bg-slate-700', 'hover:bg-slate-600', 'text-yellow-300');
+                
+                // Add dark mode class to style guide modal
+                document.querySelectorAll('.dark\\:bg-slate-800, .dark\\:text-white, .dark\\:text-slate-300, .dark\\:hover\\:bg-slate-700').forEach(el => {
+                    if (el.classList.contains('dark:bg-slate-800')) el.classList.add('bg-slate-800');
+                    if (el.classList.contains('dark:text-white')) el.classList.add('text-white');
+                    if (el.classList.contains('dark:text-slate-300')) el.classList.add('text-slate-300');
+                    if (el.classList.contains('dark:hover:bg-slate-700')) el.classList.add('hover:bg-slate-700');
+                });
+            }
+            
+            /**
+             * Remove dark mode styles
+             */
+            function removeDarkMode() {
+                elements.bodyElement.classList.add('bg-slate-100');
+                elements.bodyElement.classList.remove('bg-slate-900');
+                
+                elements.mainContainer.classList.add('bg-white');
+                elements.mainContainer.classList.remove('bg-slate-800');
+                
+                elements.pageTitle.classList.add('text-slate-800');
+                elements.pageTitle.classList.remove('text-white');
+                
+                elements.pageSubtitle.classList.add('text-slate-600');
+                elements.pageSubtitle.classList.remove('text-slate-300');
+                
+                // Update all input labels back to dark color
+                document.querySelectorAll('label').forEach(label => {
+                    label.classList.add('text-slate-700');
+                    label.classList.remove('text-slate-300');
+                });
+                
+                // Update all input backgrounds back to light mode
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    input.classList.add('bg-slate-50', 'border-slate-300');
+                    input.classList.remove('bg-slate-700', 'border-slate-600', 'text-white');
+                });
+                
+                // Update dark mode toggle icon
+                elements.buttons.darkModeToggle.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                `;
+                elements.buttons.darkModeToggle.classList.add('bg-slate-200', 'hover:bg-slate-300');
+                elements.buttons.darkModeToggle.classList.remove('bg-slate-700', 'hover:bg-slate-600', 'text-yellow-300');
+                
+                // Remove dark mode class from style guide modal
+                document.querySelectorAll('.dark\\:bg-slate-800, .dark\\:text-white, .dark\\:text-slate-300, .dark\\:hover\\:bg-slate-700').forEach(el => {
+                    if (el.classList.contains('dark:bg-slate-800')) el.classList.remove('bg-slate-800');
+                    if (el.classList.contains('dark:text-white')) el.classList.remove('text-white');
+                    if (el.classList.contains('dark:text-slate-300')) el.classList.remove('text-slate-300');
+                    if (el.classList.contains('dark:hover:bg-slate-700')) el.classList.remove('hover:bg-slate-700');
+                });
+            }
+
+            /**
+             * Save current prompt to local storage
+             */
+            function saveCurrentPrompt() {
+                if (!elements.output.value.trim()) return;
+                
+                const timestamp = new Date().toISOString();
+                const promptData = {
+                    id: `prompt_${timestamp}`,
+                    timestamp: timestamp,
+                    subject: elements.inputs.subject.value,
+                    subjectWeight: elements.weights.subject.value,
+                    environment: elements.inputs.environment.value,
+                    environmentWeight: elements.weights.environment.value,
+                    composition: elements.inputs.composition.value,
+                    compositionWeight: elements.weights.composition.value,
+                    lighting: elements.inputs.lighting.value,
+                    lightingWeight: elements.weights.lighting.value,
+                    camera: elements.inputs.camera.value,
+                    cameraWeight: elements.weights.camera.value,
+                    style: elements.inputs.style.value,
+                    styleWeight: elements.weights.style.value,
+                    negative: elements.inputs.negative.value,
+                    fullPrompt: elements.output.value
+                };
+                
+                // Add to state and save to localStorage
+                state.savedPrompts.unshift(promptData);
+                localStorage.setItem('savedPrompts', JSON.stringify(state.savedPrompts));
+                
+                // Show the saved prompts section if hidden
+                elements.savedPromptsSection.classList.remove('hidden');
+                
+                // Render the prompts
+                renderSavedPrompts();
+                
+                // Show success message
+                showCopyMessage('Prompt saved successfully!');
+            }
+            
+            /**
+             * Render saved prompts from state
+             */
+            function renderSavedPrompts() {
+                if (state.savedPrompts.length === 0) {
+                    elements.savedPromptsSection.classList.add('hidden');
+                    return;
+                }
+                
+                elements.savedPromptsSection.classList.remove('hidden');
+                elements.savedPromptsList.innerHTML = '';
+                
+                state.savedPrompts.forEach(prompt => {
+                    const date = new Date(prompt.timestamp);
+                    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                    
+                    const promptElement = document.createElement('div');
+                    promptElement.className = 'border border-slate-300 rounded-md p-4 transition-colors duration-300 hover:bg-slate-50 dark:hover:bg-slate-700';
+                    promptElement.setAttribute('data-id', prompt.id);
+                    
+                    promptElement.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-medium transition-colors duration-300">${prompt.subject.substring(0, 40)}${prompt.subject.length > 40 ? '...' : ''}</h3>
+                            <div class="flex space-x-2">
+                                <button class="load-prompt-btn p-2 text-blue-600 hover:text-blue-800 transition-colors duration-200" title="Load Prompt">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <button class="delete-prompt-btn p-2 text-red-600 hover:text-red-800 transition-colors duration-200" title="Delete Prompt">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-500 transition-colors duration-300">Saved on: ${formattedDate}</p>
+                        <div class="mt-2 text-sm truncate text-slate-600 transition-colors duration-300">${prompt.fullPrompt.split('\n\n')[0].substring(0, 100)}${prompt.fullPrompt.split('\n\n')[0].length > 100 ? '...' : ''}</div>
+                    `;
+                    
+                    elements.savedPromptsList.appendChild(promptElement);
+                });
+                
+                // Add event listeners to the buttons
+                document.querySelectorAll('.load-prompt-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const promptId = e.target.closest('[data-id]').getAttribute('data-id');
+                        loadSavedPrompt(promptId);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-prompt-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const promptId = e.target.closest('[data-id]').getAttribute('data-id');
+                        deleteSavedPrompt(promptId);
+                    });
+                });
+            }
+            
+            /**
+             * Load a saved prompt
+             */
+            function loadSavedPrompt(id) {
+                const prompt = state.savedPrompts.find(p => p.id === id);
+                if (!prompt) return;
+                
+                // Fill form fields
+                elements.inputs.subject.value = prompt.subject;
+                elements.weights.subject.value = prompt.subjectWeight;
+                elements.inputs.environment.value = prompt.environment;
+                elements.weights.environment.value = prompt.environmentWeight;
+                elements.inputs.composition.value = prompt.composition;
+                elements.weights.composition.value = prompt.compositionWeight;
+                elements.inputs.lighting.value = prompt.lighting;
+                elements.weights.lighting.value = prompt.lightingWeight;
+                elements.inputs.camera.value = prompt.camera;
+                elements.weights.camera.value = prompt.cameraWeight;
+                elements.inputs.style.value = prompt.style;
+                elements.weights.style.value = prompt.styleWeight;
+                elements.inputs.negative.value = prompt.negative;
+                
+                // Update output
+                updatePrompt();
+                
+                // Show message
+                showCopyMessage('Prompt loaded successfully!');
+            }
+            
+            /**
+             * Delete a saved prompt
+             */
+            function deleteSavedPrompt(id) {
+                state.savedPrompts = state.savedPrompts.filter(p => p.id !== id);
+                localStorage.setItem('savedPrompts', JSON.stringify(state.savedPrompts));
+                renderSavedPrompts();
+                showCopyMessage('Prompt deleted!');
             }
 
             /**
              * Update the output prompt when inputs change
              */
             function updatePrompt() {
+                // Array to store prompt parts with weights
                 const promptParts = [
-                    elements.inputs.subject.value,
-                    elements.inputs.environment.value,
-                    elements.inputs.composition.value,
-                    elements.inputs.lighting.value,
-                    elements.inputs.camera.value,
-                    elements.inputs.style.value
+                    { text: elements.inputs.subject.value, weight: elements.weights.subject.value },
+                    { text: elements.inputs.environment.value, weight: elements.weights.environment.value },
+                    { text: elements.inputs.composition.value, weight: elements.weights.composition.value },
+                    { text: elements.inputs.lighting.value, weight: elements.weights.lighting.value },
+                    { text: elements.inputs.camera.value, weight: elements.weights.camera.value },
+                    { text: elements.inputs.style.value, weight: elements.weights.style.value }
                 ];
                 
-                // Filter out empty parts and join with semicolons
+                // Filter out empty parts and apply weights if needed
                 const positivePrompt = promptParts
-                    .filter(part => part.trim() !== '')
+                    .filter(part => part.text.trim() !== '')
+                    .map(part => {
+                        const weight = parseFloat(part.weight);
+                        // Only add weight if it's not 1.0
+                        if (weight !== 1.0) {
+                            return `(${part.text}:${weight.toFixed(1)})`;
+                        }
+                        return part.text;
+                    })
                     .join('; ');
                 
                 // Get negative prompt if any
@@ -319,6 +798,13 @@
                 Object.keys(elements.inputs).forEach(key => {
                     if (key !== 'negative') {
                         elements.inputs[key].value = getRandomItem(promptDatabase[key]);
+                        
+                        // Also randomize weights slightly for more variety
+                        if (elements.weights[key]) {
+                            // Random weight between 0.8 and 1.2
+                            const randomWeight = (Math.random() * 0.4 + 0.8).toFixed(1);
+                            elements.weights[key].value = randomWeight;
+                        }
                     }
                 });
                 
@@ -417,6 +903,92 @@
                 setTimeout(() => {
                     elements.copyMessage.classList.add('hidden');
                 }, 2000);
+            }
+
+            /**
+             * Share current prompt via URL
+             */
+            function sharePrompt() {
+                if (!elements.output.value.trim()) return;
+                
+                // Create an object with all current values
+                const promptData = {
+                    subject: elements.inputs.subject.value,
+                    subjectWeight: elements.weights.subject.value,
+                    environment: elements.inputs.environment.value,
+                    environmentWeight: elements.weights.environment.value,
+                    composition: elements.inputs.composition.value,
+                    compositionWeight: elements.weights.composition.value,
+                    lighting: elements.inputs.lighting.value,
+                    lightingWeight: elements.weights.lighting.value,
+                    camera: elements.inputs.camera.value,
+                    cameraWeight: elements.weights.camera.value,
+                    style: elements.inputs.style.value,
+                    styleWeight: elements.weights.style.value,
+                    negative: elements.inputs.negative.value
+                };
+                
+                // Convert to base64
+                const promptStr = JSON.stringify(promptData);
+                const encoded = btoa(encodeURIComponent(promptStr));
+                
+                // Create shareable URL
+                const url = new URL(window.location.href);
+                url.searchParams.set('p', encoded);
+                
+                // Copy to clipboard
+                copyToClipboard(url.toString());
+                
+                // Show success message
+                showCopyMessage('Shareable link copied to clipboard!');
+            }
+            
+            /**
+             * Check URL for shared prompt parameters
+             */
+            function checkUrlForSharedPrompt() {
+                const url = new URL(window.location.href);
+                const promptParam = url.searchParams.get('p');
+                
+                if (promptParam) {
+                    try {
+                        // Decode the parameter
+                        const decoded = decodeURIComponent(atob(promptParam));
+                        const promptData = JSON.parse(decoded);
+                        
+                        // Fill form fields
+                        elements.inputs.subject.value = promptData.subject || '';
+                        elements.weights.subject.value = promptData.subjectWeight || 1.0;
+                        
+                        elements.inputs.environment.value = promptData.environment || '';
+                        elements.weights.environment.value = promptData.environmentWeight || 1.0;
+                        
+                        elements.inputs.composition.value = promptData.composition || '';
+                        elements.weights.composition.value = promptData.compositionWeight || 1.0;
+                        
+                        elements.inputs.lighting.value = promptData.lighting || '';
+                        elements.weights.lighting.value = promptData.lightingWeight || 1.0;
+                        
+                        elements.inputs.camera.value = promptData.camera || '';
+                        elements.weights.camera.value = promptData.cameraWeight || 1.0;
+                        
+                        elements.inputs.style.value = promptData.style || '';
+                        elements.weights.style.value = promptData.styleWeight || 1.0;
+                        
+                        elements.inputs.negative.value = promptData.negative || '';
+                        
+                        // Update output
+                        updatePrompt();
+                        
+                        // Show message
+                        showCopyMessage('Shared prompt loaded!');
+                        
+                        // Clean URL to prevent reloading on refresh
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    } catch (e) {
+                        console.error('Error loading shared prompt:', e);
+                    }
+                }
             }
 
             // Initialize the application
